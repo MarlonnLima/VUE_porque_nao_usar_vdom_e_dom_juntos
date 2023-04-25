@@ -24,21 +24,14 @@
     <div id="app">
         <h1>Manipulando CSS com VueJS</h1>
 
-        <p :class="{ vermelho: eVermelho, 'texto-branco': eTextoBranco, destaque: eDestaque }">
-            Definindo classes com objetos
+        <p :class="[estilo2, {vermelho: true, destaque: eDestaque}]">
+            Definindo classes com arrays
         </p>
-
-        <button @click="eVermelho = !eVermelho">
-            <span v-text="eVermelho ? 'Remover background' : 'Aplicar background'"></span>
+        <button @click="estilo2 = ''">
+            Remover Texto branco
         </button>
-
-        <button @click="eTextoBranco = !eTextoBranco">
-            <span v-text="eTextoBranco ? 'Remover Texto Branco' : 'Aplicar Texto Branco'"></span>
-        </button>
-
-        <button @click="eDestaque = !eDestaque">
-            <span v-text="eDestaque ? 'Remover Destaque' : 'Aplicar Destaque'"></span>
-        </button>
+        <button @click="eDestaque = !eDestaque">Inventer destaque</button>
+       
     </div>
 
     <script>
@@ -46,10 +39,11 @@
         const vm = new Vue({
             el: '#app', // # para selecionar por id | . para selecionar por class 
             data: {
-                eVermelho: false,
-                eTextoBranco: false,
+                estilo1: 'vermelho',
+                estilo2: 'texto-branco',
+                estilo3: 'destaque',
                 eDestaque: false,
-                },
+            },
             //não usar mesmos nomes no data e no methods dará conflito
             methods: {},
             computed: {},
