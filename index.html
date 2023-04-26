@@ -12,14 +12,16 @@
 
 <body>
     <div id="app">
-        <h1>Manipulando CSS com VueJS</h1>
-
-        <div :style="estilo">
-            Definindo styles com objetos
-        </div>
-        {{ estilo}}
-
-        <button @click="tamanhoTexto += 5">Aumentar Fonte</button>
+        <form ref="formulario">
+            <span>Nome:</span> <input type="text" id="inputNome" ref="inputNome">
+            <br>
+            <span>Comentário:</span>
+            <textarea></textarea>
+            <br>
+            <button @click.prevent="cadastrar()">Cadastrar</button>
+        </form>
+        <hr>
+        {{resultado}}
     </div>
 
     <script>
@@ -27,31 +29,18 @@
         const vm = new Vue({
             el: '#app', // # para selecionar por id | . para selecionar por class 
             data: {
-               tamanhoTexto: 30
+                resultado: ''
             },
             //não usar mesmos nomes no data e no methods dará conflito
-            methods: {},
-            computed: {
-                estilo() {
+            methods: {
+                cadastrar() {
+                    let nome = this.$refs.inputNome.value
+                    let comentario = this.$refs.formulario[1].value
 
-                    let witdh = Math.floor((Math.random() * 100 + 100))
-                    let height = Math.floor((Math.random() * 100 + 100))
-
-                    let background ='blue'
-                    let horas = new Date()
-
-                    if(horas.getHours() > 18) {
-                        background = 'red'
-                    }
-                    
-                    return {
-                        background: background,
-                        width: witdh + 'px',
-                        height: height + 'px',
-                        padding: 10 + 'px',
-                        fontSize: this.tamanhoTexto + 'px'
-                    }
+                    this.resultado = `${nome} disse "${comentario}"`
                 }
+            },
+            computed: {
             },
             watch: {
             }
