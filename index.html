@@ -12,32 +12,28 @@
 
 <body>
     <div id="app">
-        <form ref="formulario">
-            <span>Nome:</span> <input type="text" id="inputNome" ref="inputNome">
-            <br>
-            <span>Comentário:</span>
-            <textarea></textarea>
-            <br>
-            <button @click.prevent="cadastrar()">Cadastrar</button>
-        </form>
-        <hr>
-        {{resultado}}
+        <p>{{ texto }}</p>
+        <button @click="modificarTextoVD()">Adicionar @ (VD)</button>
+        <button onclick="modificarTexto()">Adicionar @</button>
     </div>
-
     <script>
+
+        function modificarTexto() {
+            let t = document.querySelector('p').innerText;
+            t += '@';
+            document.querySelector('p').innerHTML = t;
+        }
+
 
         const vm = new Vue({
             el: '#app', // # para selecionar por id | . para selecionar por class 
             data: {
-                resultado: ''
+                texto: 'DOM e virtual DOM'
             },
             //não usar mesmos nomes no data e no methods dará conflito
             methods: {
-                cadastrar() {
-                    let nome = this.$refs.inputNome.value
-                    let comentario = this.$refs.formulario[1].value
-
-                    this.resultado = `${nome} disse "${comentario}"`
+                modificarTextoVD() {
+                    this.texto += '@'
                 }
             },
             computed: {
